@@ -37,6 +37,9 @@ void set_cursor(int x = 0, int y = 0) {
 void print_menu(int index, std::pair<int, int> coord) {
     using namespace std;
     set_cursor(coord.first, coord.second);
+
+    cout << dye::light_red("Press ctrl-C to exit this program") << std::endl;
+
     if (index == 1)
         cout << dye::aqua("1. Black Jack") << "\t\r" << endl;
     else
@@ -69,6 +72,7 @@ int lobby(bool first_time) {
     int now_selecting = 1;
     int max = 4;
     int min = 1;
+    system("cls");
     // bool prefix = false;
     if (first_time) {
         std::cout << "Welcome to This program" << std::endl;

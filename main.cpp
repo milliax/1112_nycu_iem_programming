@@ -8,7 +8,6 @@
 
 int main() {
     bool first_time = true;
-    // std::cout << "Hello World" << std::endl;
     while (true) {
         int selection = lobby::lobby(first_time);
         first_time = false;
@@ -22,16 +21,31 @@ int main() {
                 std::cout << dye::black_on_bright_white("Entering Black Jack")
                           << std::endl;
                 black_jack::play();
+                system("pause");
                 break;
             case 2:
+                std::cout << dye::black_on_bright_white(
+                                 "Entering Cows and Bulls")
+                          << std::endl;
+                cows_and_bulls::play();
+                system("pause");
                 break;
             case 3:
+                std::cout << dye::black_on_bright_white(
+                                 "Entering Caesar Cipher")
+                          << std::endl;
+                system("pause");
                 break;
             case 4:
+                std::cout << dye::black_on_bright_white(
+                                 "Entering Autoplay Cows and Bulls")
+                          << std::endl;
+                system("pause");
                 break;
             default:
                 break;
         }
+        std::cout << std::endl;
     }
     return 0;
 }
