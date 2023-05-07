@@ -86,16 +86,13 @@ void play() {
         << std::endl;
     std::cout << "In the form of xAxB" << std::endl;
 
-    for (int i = 0; i < 4; ++i) {
-        std::cout << ans[i] << " ";
-    }
     std::cout << std::endl;
 
     while (attempts_remain--) {
         std::string str = " Attempt ";
         str += (total_attempts - attempts_remain + '0');
         str += " ";
-        std::cout << dye::grey_on_light_green(str) << std::endl;
+        std::cout << dye::black_on_light_green(str) << std::endl;
 
         std::cout << "Your answer: ";
         bool checked = false;
@@ -122,7 +119,11 @@ void play() {
     }
 
     if (!resolved) {
-        std::cout << dye::black_on_grey("Correct answer: ") << ans << std::endl;
+        std::cout << dye::black_on_grey("Correct answer: ");
+        for (int i = 0; i < 4; ++i) {
+            std::cout << ans[i] << " ";
+        }
+        std::cout << std::endl;
     }
 
     return;

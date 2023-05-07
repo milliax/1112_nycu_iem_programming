@@ -59,7 +59,31 @@ void print_continue(int index) {
 
 int biggest_but_less_than_21(std::vector<int> cards) {
     // TODO: card 1 is not determined yet.
-    return cnt_all_points(cards);
+    int number_of_1 = 0;
+    int sum = 0;
+    for (auto card : cards) {
+        if (card == 1) {
+            number_of_1++;
+        } else {
+            sum += cnt_point(card);
+        }
+    }
+
+    int pos = 0;
+    int k = 1;
+    std::vector<int> combinitions = {sum};
+
+    while (number_of_1--) {
+        for (int i = 0; i < k; ++i) {
+            combinitions.push_back(combinitions[pos] + 1);
+            combinitions.push_back(combinitions[pos++] + 11);
+        }
+        k *= 2;
+    }
+    std::vector<int>::iterator it =
+        std::upper_bound(combinitions.begin(), combinitions.end(), 21);
+
+    return (it == combinitions.begin()) ? *it : *(it--);
 }
 
 void shuffle_arr(int* arr) {
@@ -167,6 +191,8 @@ void play() {
         } else {
             std::cout << dye::purple("You Lost") << std::endl;
             std::cout << "Your cards exceeded 21" << std::endl;
+            std::cout << "Computer's cards: ";
+            list_cards(computer_cards);
         }
     } else if (cnt_all_points(computer_cards) > 21) {
         // computer lost cards bigger than 21
@@ -182,6 +208,7 @@ void play() {
         // computer wins
         std::cout << dye::purple("You Lost") << std::endl;
         std::cout << "Computer's number is bigger than yours" << std::endl;
+        std::cout << "Computer's cards: ";
         list_cards(computer_cards);
     } else {
         // user wins
