@@ -1,3 +1,4 @@
+#include <ctime>
 #include <iostream>
 
 #include "lib/black_jack.h"
@@ -7,6 +8,7 @@
 #include "lib/lobby.h"
 
 int main() {
+    srand(time(NULL));
     bool first_time = true;
     while (true) {
         int selection = lobby::lobby(first_time);
@@ -14,7 +16,8 @@ int main() {
         // std::cout << selection << std::endl;
         switch (selection) {
             case 0:
-                std::cout << "Thank you for playing this game" << std::endl;
+                std::cout << std::endl
+                          << "Thank you for playing this game" << std::endl;
                 std::cout << "Powered By Milliax" << std::endl;
                 return 0;
             case 1:

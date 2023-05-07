@@ -1,53 +1,46 @@
-// #include <windows.h>
 #include <conio.h>
 
 #include <algorithm>
 #include <iostream>
-#include <queue>
 #include <vector>
 
 #include "color.hpp"
 #include "util.h"
+
+#define card_num 13
 
 namespace black_jack {
 int _min(int a, int b) {
     if (a > b) return b;
     return a;
 }
-
 int _max(int a, int b) {
     if (a > b) return a;
     return b;
 }
 std::string types[4] = {"♠", "♥", "♦", "♣"};
 int cnt_point(int card) {
-    if (card % 12 >= 10) {
+    if (card % card_num >= 10) {
         return 10;
     }
-    if (!(card % 12)) {
+    if (!(card % card_num)) {
         return 10;
     }
-    return card % 12;
+    return card % card_num;
 }
 
 std::string get_type(int card) {
-    if (!(card % 12)) {
-        return types[card / 12 - 1];
+    if (!(card % card_num)) {
+        return types[card / card_num - 1];
     }
-    return types[card / 12];
+    return types[card / card_num];
 }
 
 int cnt_all_points(std::vector<int> cards) {
     int total = 0;
     for (std::vector<int>::iterator it = cards.begin(); it != cards.end();
          ++it) {
-        if (!(*it % 12)) {
-            total += 10;
-        } else if (*it % 12 < 10) {
-            total += *it % 12;
-        } else {
-            total += 10;
-        }
+        total += cnt_point(*it);
     }
     return total;
 }
@@ -69,12 +62,30 @@ int biggest_but_less_than_21(std::vector<int> cards) {
     return cnt_all_points(cards);
 }
 
+void shuffle_arr(int* arr) {
+    std::sort(arr, arr + 52, [](int a, int b) {
+        return (((double)rand() / (RAND_MAX)) > 0.5);
+    });
+    return;
+}
+
+void list_cards(std::vector<int> cards) {
+    for (auto e : cards) {
+        int value = e % card_num;
+        if (!value) value = card_num;
+        std::cout << get_type(e) << " " << value << " ";
+    }
+    return;
+}
+
 void play() {
     int keys;
     int now_selecting = 1;
     int min = 1;
     int max = 2;
     bool selected = false;
+    int pos = 0;
+    system("cls");
     std::cout << "Black Jack start!!" << std::endl;
     // 21 點
 
@@ -83,21 +94,15 @@ void play() {
     for (int i = 0; i < 52; ++i) {
         cards[i] = i + 1;
     }
-    std::random_shuffle(cards, cards + 52);
-    std::queue<int> random_cards;
-    for (int i = 0; i < 52; ++i) {
-        random_cards.push(cards[i]);
-    }
 
-    int computer_total = 0;
+    shuffle_arr(cards);
+
     std::vector<int> computer_cards;
 
     // computer get points
-    while (computer_total <= 18) {
-        int last = random_cards.front();
-        random_cards.pop();
-        computer_total += cnt_point(last);
-        computer_cards.push_back(last);
+    while (cnt_all_points(computer_cards) <= 18) {
+        int first = cards[pos++];
+        computer_cards.push_back(first);
     }
 
     std::cout << "Computer has finished choosing its cards" << std::endl;
@@ -109,20 +114,13 @@ void play() {
     std::vector<int> user_cards;
 
     // user get new cards;
-    int top = random_cards.front();
-    random_cards.pop();
+    int top = cards[pos++];
     user_cards.push_back(top);
+    // list all cards user got
+    std::cout << "These are Your cards" << std::endl;
+    list_cards(user_cards);
 
     while (cnt_all_points(user_cards) <= 21) {
-        util::set_cursor(cursor.first, cursor.second);
-        // list all cards user got
-        std::cout << "These are Your cards" << std::endl;
-        for (std::vector<int>::iterator it = user_cards.begin();
-             it != user_cards.end(); ++it) {
-            int value = *it / 12;
-            if (!value) value = 12;
-            std::cout << get_type(*it) << " " << value << " ";
-        }
         std::cout << std::endl;
         // continue? prompt
         std::pair<int, int> continue_cursor = util::get_cursor();
@@ -131,7 +129,6 @@ void play() {
         while (true) {
             fflush(stdin);
             keys = getch();
-
             switch (keys) {
                 case 72:
                     // code for arrow up
@@ -142,30 +139,39 @@ void play() {
                     now_selecting = _min(max, now_selecting + 1);
                     break;
                 case 13:
-                    std::cout << "Enter CLicked" << std::endl;
                     selected = true;
                     break;
             }
             if (selected) break;
-            int top = random_cards.front();
-            random_cards.pop();
-            user_cards.push_back(top);
             util::set_cursor(continue_cursor.first, continue_cursor.second);
             print_continue(now_selecting);
         }
         if (selected && now_selecting == 2) break;
+        // deploy new card
+        int top = cards[pos++];
+        user_cards.push_back(top);
+        util::set_cursor(cursor.first, cursor.second);
+        // list all cards user got
+        std::cout << "These are Your cards" << std::endl;
+        list_cards(user_cards);
     }
 
     // printing the result
+    std::cout << std::endl << "\33[2K\r" << std::endl << "\33[2K\r";
 
     if (cnt_all_points(user_cards) > 21) {
-        // user must failed
-        std::cout << dye::purple("You Lost") << std::endl;
-        std::cout << "Your cards exceed 21" << std::endl;
+        // user must failed or fair
+        if (cnt_all_points(computer_cards) > 21) {
+            std::cout << dye::blue("Fair") << std::endl;
+            std::cout << "Your cards both exceeded 21" << std::endl;
+        } else {
+            std::cout << dye::purple("You Lost") << std::endl;
+            std::cout << "Your cards exceeded 21" << std::endl;
+        }
     } else if (cnt_all_points(computer_cards) > 21) {
         // computer lost cards bigger than 21
         std::cout << dye::green("You WIN !!") << std::endl;
-        std::cout << "Computer's cards exceed 21" << std::endl;
+        std::cout << "Computer's cards exceeded 21" << std::endl;
     } else if (biggest_but_less_than_21(computer_cards) ==
                biggest_but_less_than_21(user_cards)) {
         // fair
@@ -176,11 +182,14 @@ void play() {
         // computer wins
         std::cout << dye::purple("You Lost") << std::endl;
         std::cout << "Computer's number is bigger than yours" << std::endl;
+        list_cards(computer_cards);
     } else {
         // user wins
         std::cout << dye::green("You WIN !!") << std::endl;
         std::cout << "Your number is bigger than computer's" << std::endl;
     }
+
+    std::cout << std::endl;
 
     // system("pause");
     return;
