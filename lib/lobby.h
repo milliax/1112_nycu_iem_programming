@@ -4,7 +4,9 @@
 #include <iostream>
 
 #include "color.hpp"
+#include "util.h"
 
+namespace lobby {
 int _min(int a, int b) {
     if (a > b) return b;
     return a;
@@ -14,29 +16,9 @@ int _max(int a, int b) {
     if (a > b) return a;
     return b;
 }
-
-namespace lobby {
-std::pair<int, int> get_cursor() {
-    HANDLE handle;
-    CONSOLE_SCREEN_BUFFER_INFO cbsi;
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleScreenBufferInfo(handle, &cbsi);
-    return std::make_pair(cbsi.dwCursorPosition.X, cbsi.dwCursorPosition.Y);
-}
-
-void set_cursor(int x = 0, int y = 0) {
-    HANDLE handle;
-    COORD coordinates;
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    coordinates.X = x;
-    coordinates.Y = y;
-    SetConsoleCursorPosition(handle, coordinates);
-    return;
-}
-
 void print_menu(int index, std::pair<int, int> coord) {
     using namespace std;
-    set_cursor(coord.first, coord.second);
+    util::set_cursor(coord.first, coord.second);
 
     cout << dye::light_red("Press ctrl-C to exit this program") << std::endl;
 
@@ -81,7 +63,7 @@ int lobby(bool first_time) {
         std::cout << "There are Four different games you can try." << std::endl;
     }
 
-    std::pair<int, int> coord = get_cursor();
+    std::pair<int, int> coord = util::get_cursor();
 
     print_menu(now_selecting, coord);
 

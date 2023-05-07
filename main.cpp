@@ -11,7 +11,7 @@ int main() {
     while (true) {
         int selection = lobby::lobby(first_time);
         first_time = false;
-        std::cout << selection << std::endl;
+        // std::cout << selection << std::endl;
         switch (selection) {
             case 0:
                 std::cout << "Thank you for playing this game" << std::endl;
