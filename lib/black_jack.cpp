@@ -1,15 +1,16 @@
-#include "lib/black_jack.h"
+#include "black_jack.h"
 
 #include <conio.h>
+
 #include <algorithm>
-#include <vector>
 #include <iostream>
+#include <vector>
 
-#include "lib/color.hpp"
-#include "lib/util.h"
+#include "color.hpp"
+#include "util.h"
 
-namespace black_jack{
-    int _min(int a, int b) {
+namespace black_jack {
+int _min(int a, int b) {
     if (a > b) return b;
     return a;
 }
@@ -220,4 +221,4 @@ void play() {
     // system("pause");
     return;
 }
-}
+}  // namespace black_jack
