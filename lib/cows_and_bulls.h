@@ -5,7 +5,6 @@
 #include "color.hpp"
 
 namespace cows_and_bulls {
-const int total_attmepts;
 int* generate_question();
 int* parse_str2int(std::string);
 

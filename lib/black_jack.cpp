@@ -58,7 +58,6 @@ void print_continue(int index) {
 }
 
 int biggest_but_less_than_21(std::vector<int> cards) {
-    // TODO: card 1 is not determined yet.
     int number_of_1 = 0;
     int sum = 0;
     for (auto card : cards) {

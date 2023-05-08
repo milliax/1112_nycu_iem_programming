@@ -7,7 +7,7 @@ namespace black_jack {
 int _min(int, int);
 int _max(int, int);
 
-std::string types[4];
+// std::string types[4];
 std::string get_type(int);
 
 int cnt_point(int);
