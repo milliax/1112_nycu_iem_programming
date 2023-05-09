@@ -9,18 +9,19 @@
 #include "color.hpp"
 #include "util.h"
 
-namespace black_jack {
-int _min(int a, int b) {
+#define card_num 13
+
+int BlackJack::mini(int a, int b) {
     if (a > b) return b;
     return a;
 }
-int _max(int a, int b) {
+
+int BlackJack::maxi(int a, int b) {
     if (a > b) return a;
     return b;
 }
-std::string types[4] = {"♠", "♥", "♦", "♣"};
 
-int cnt_point(int card) {
+int BlackJack::cnt_point(int card) {
     if (card % card_num >= 10) {
         return 10;
     }
@@ -29,14 +30,15 @@ int cnt_point(int card) {
     }
     return card % card_num;
 }
-std::string get_type(int card) {
+
+std::string BlackJack::get_type(int card) {
     if (!(card % card_num)) {
         return types[card / card_num - 1];
     }
     return types[card / card_num];
 }
 
-int cnt_all_points(std::vector<int> cards) {
+int BlackJack::cnt_all_points(std::vector<int> cards) {
     int total = 0;
     for (std::vector<int>::iterator it = cards.begin(); it != cards.end();
          ++it) {
@@ -45,7 +47,7 @@ int cnt_all_points(std::vector<int> cards) {
     return total;
 }
 
-void print_continue(int index) {
+void BlackJack::print_continue(int index) {
     if (index == 1)
         std::cout << dye::aqua("continue getting new cards") << std::endl;
     else
@@ -57,7 +59,7 @@ void print_continue(int index) {
         std::cout << "Stop and check the result" << std::endl;
 }
 
-int biggest_but_less_than_21(std::vector<int> cards) {
+int BlackJack::biggest_but_less_than_21(std::vector<int> cards) {
     int number_of_1 = 0;
     int sum = 0;
     for (auto card : cards) {
@@ -85,14 +87,14 @@ int biggest_but_less_than_21(std::vector<int> cards) {
     return (it == combinitions.begin()) ? *it : *(it--);
 }
 
-void shuffle_arr(int* arr) {
+void BlackJack::shuffle_arr(int* arr) {
     std::sort(arr, arr + 52, [](int a, int b) {
         return (((double)rand() / (RAND_MAX)) > 0.5);
     });
     return;
 }
 
-void list_cards(std::vector<int> cards) {
+void BlackJack::list_cards(std::vector<int> cards) {
     for (auto e : cards) {
         int value = e % card_num;
         if (!value) value = card_num;
@@ -101,7 +103,7 @@ void list_cards(std::vector<int> cards) {
     return;
 }
 
-void play() {
+void BlackJack::play() {
     int keys;
     int now_selecting = 1;
     int min = 1;
@@ -131,8 +133,9 @@ void play() {
     std::cout << "Computer has finished choosing its cards" << std::endl;
     std::cout << "now is your turn" << std::endl;
 
-    // TODO: determine whether computer is lost already (cards bigger than 21)
-    std::pair<int, int> cursor = util::get_cursor();
+    // TODO: determine whether computer is lost already (cards bigger than
+    // 21)
+    std::pair<int, int> cursor = util.get_cursor();
 
     std::vector<int> user_cards;
 
@@ -146,7 +149,7 @@ void play() {
     while (cnt_all_points(user_cards) <= 21) {
         std::cout << std::endl;
         // continue? prompt
-        std::pair<int, int> continue_cursor = util::get_cursor();
+        std::pair<int, int> continue_cursor = util.get_cursor();
         selected = false;
         print_continue(now_selecting);
         while (true) {
@@ -155,25 +158,25 @@ void play() {
             switch (keys) {
                 case 72:
                     // code for arrow up
-                    now_selecting = _max(min, now_selecting - 1);
+                    now_selecting = maxi(min, now_selecting - 1);
                     break;
                 case 80:
                     // code for arrow down
-                    now_selecting = _min(max, now_selecting + 1);
+                    now_selecting = mini(max, now_selecting + 1);
                     break;
                 case 13:
                     selected = true;
                     break;
             }
             if (selected) break;
-            util::set_cursor(continue_cursor.first, continue_cursor.second);
+            util.set_cursor(continue_cursor.first, continue_cursor.second);
             print_continue(now_selecting);
         }
         if (selected && now_selecting == 2) break;
         // deploy new card
         int top = cards[pos++];
         user_cards.push_back(top);
-        util::set_cursor(cursor.first, cursor.second);
+        util.set_cursor(cursor.first, cursor.second);
         // list all cards user got
         std::cout << "These are Your cards" << std::endl;
         list_cards(user_cards);
@@ -220,4 +223,4 @@ void play() {
     // system("pause");
     return;
 }
-}  // namespace black_jack
+// };

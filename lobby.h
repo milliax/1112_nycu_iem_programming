@@ -1,9 +1,16 @@
 #include <iostream>
 
-namespace lobby {
-int _min(int, int);
-int _max(int, int);
-int lobby(bool);
+#include "util.h"
 
-void print_menu(int, std::pair<int, int>);
-}  // namespace lobby
+class Lobby {
+    Util util;
+    int keys;
+    int now_selecting;
+    const int max = 4;
+    const int min = 1;
+
+   public:
+    Lobby() = default;
+    int lobby(bool);
+    void print_menu(int, std::pair<int, int>);
+};

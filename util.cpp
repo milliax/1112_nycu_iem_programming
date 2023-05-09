@@ -1,12 +1,12 @@
 #include "util.h"
+
 #include <windows.h>
 
 #include <tuple>
 
 #include "util.h"
 
-namespace util {
-std::pair<int, int> get_cursor() {
+std::pair<int, int> Util::get_cursor() {
     HANDLE handle;
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
     handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -14,7 +14,7 @@ std::pair<int, int> get_cursor() {
     return std::make_pair(cbsi.dwCursorPosition.X, cbsi.dwCursorPosition.Y);
 }
 
-void set_cursor(int x = 0, int y = 0) {
+void Util::set_cursor(int x = 0, int y = 0) {
     HANDLE handle;
     COORD coordinates;
     handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -23,4 +23,13 @@ void set_cursor(int x = 0, int y = 0) {
     SetConsoleCursorPosition(handle, coordinates);
     return;
 }
-}  // namespace util
+
+int Util::max(int a, int b) {
+    if (a > b) return a;
+    return b;
+}
+
+int Util::min(int a, int b) {
+    if (a > b) return b;
+    return a;
+}

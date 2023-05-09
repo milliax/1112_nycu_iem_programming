@@ -4,14 +4,17 @@
 
 #include "color.hpp"
 
-namespace cows_and_bulls {
-int* generate_question();
-int* parse_str2int(std::string);
+class CowsAndBulls {
+    const int total_attempts = 10;
 
-std::pair<int, int> compare(int*, int*);
+   public:
+    CowsAndBulls() = default;
+    int* generate_question();
+    void print_ans(int*);
+    int* parse_str2int(std::string);
 
-bool check_input(std::string);
+    std::pair<int, int> compare(int*, int*);
 
-void print_ans(int*);
-void play();
-}  // namespace cows_and_bulls
+    bool check_input(std::string);
+    void play();
+};

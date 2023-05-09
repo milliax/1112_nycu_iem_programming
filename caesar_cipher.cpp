@@ -2,10 +2,7 @@
 
 #include <iostream>
 
-namespace caesar_cipher {
-void play() {
+void CaesarCipher::play() {
     std::cout << "Caesar_cipher start!!" << std::endl;
     return;
 }
-
-}  // namespace caesar_cipher

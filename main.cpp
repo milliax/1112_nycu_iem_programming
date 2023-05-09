@@ -8,10 +8,14 @@
 #include "lobby.h"
 
 int main() {
+    Lobby lb;
+    CaesarCipher cc;
+    CowsAndBulls cnb;
+    BlackJack bj;
     srand(time(NULL));
     bool first_time = true;
     while (true) {
-        int selection = lobby::lobby(first_time);
+        int selection = lb.lobby(first_time);
         first_time = false;
         // std::cout << selection << std::endl;
         switch (selection) {
@@ -23,14 +27,14 @@ int main() {
             case 1:
                 std::cout << dye::black_on_bright_white("Entering Black Jack")
                           << std::endl;
-                black_jack::play();
+                bj.play();
                 system("pause");
                 break;
             case 2:
                 std::cout << dye::black_on_bright_white(
                                  "Entering Cows and Bulls")
                           << std::endl;
-                cows_and_bulls::play();
+                cnb.play();
                 system("pause");
                 break;
             case 3:

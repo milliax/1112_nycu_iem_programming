@@ -1,5 +1,5 @@
 TARGET = main
-SRCS = $(wildcard *.cpp) $(wildcard *.hpp)
+SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 CC = g++
 CCFLAGS = -std=c++11 -Wall

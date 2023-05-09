@@ -6,9 +6,7 @@
 
 #include "color.hpp"
 
-namespace cows_and_bulls {
-const int total_attempts = 10;
-int* generate_question() {
+int* CowsAndBulls::generate_question(){
     static int result[4];
     int temp[10];
     for (int i = 0; i < 10; ++i) {
@@ -23,7 +21,7 @@ int* generate_question() {
     return result;
 }
 
-void print_ans(int* ans) {
+void CowsAndBulls::print_ans(int* ans) {
     for (int i = 0; i < 4; ++i) {
         std::cout << ans;
     }
@@ -31,7 +29,7 @@ void print_ans(int* ans) {
     return;
 }
 
-int* parse_str2int(std::string input) {
+int* CowsAndBulls::parse_str2int(std::string input) {
     static int ans[4];
     for (int i = 0; i < 4; ++i) {
         ans[i] = input[i] - '0';
@@ -39,7 +37,7 @@ int* parse_str2int(std::string input) {
     return ans;
 }
 
-std::pair<int, int> compare(int* input, int* ans) {
+std::pair<int, int> CowsAndBulls::compare(int* input, int* ans) {
     int a = 0;
     int b = 0;
     bool table[10] = {};
@@ -59,7 +57,7 @@ std::pair<int, int> compare(int* input, int* ans) {
     return std::make_pair(a, b);
 }
 
-bool check_input(std::string input) {
+bool CowsAndBulls::check_input(std::string input) {
     if (input.size() != 4) {
         return false;
     }
@@ -69,7 +67,7 @@ bool check_input(std::string input) {
     return true;
 }
 
-void play() {
+void CowsAndBulls::play() {
     int attempts_remain = total_attempts;
     bool resolved = false;
     std::string input;
@@ -128,5 +126,3 @@ void play() {
 
     return;
 }
-
-}  // namespace cows_and_bulls
