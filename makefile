@@ -7,7 +7,7 @@ CCFLAGS = -std=c++11
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
 
-%.o: %.cpp
+%.o: %.cpp %.hpp
 	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:

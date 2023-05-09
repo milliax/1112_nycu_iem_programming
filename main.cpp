@@ -6,7 +6,6 @@
 #include "lib/caesar_cipher.h"
 #include "lib/cows_and_bulls.h"
 #include "lib/lobby.h"
-
 int main() {
     srand(time(NULL));
     bool first_time = true;
