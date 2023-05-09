@@ -1,9 +1,9 @@
 #include <ctime>
 #include <iostream>
 
-#include "color.hpp"
 #include "black_jack.h"
 #include "caesar_cipher.h"
+#include "color.h"
 #include "cows_and_bulls.h"
 #include "lobby.h"
 
@@ -12,6 +12,7 @@ int main() {
     CaesarCipher cc;
     CowsAndBulls cnb;
     BlackJack bj;
+    Color color;
     srand(time(NULL));
     bool first_time = true;
     while (true) {
@@ -25,28 +26,26 @@ int main() {
                 std::cout << "Powered By Milliax" << std::endl;
                 return 0;
             case 1:
-                std::cout << dye::black_on_bright_white("Entering Black Jack")
-                          << std::endl;
+                color.print_black_on_bright_white("Entering Black Jack");
+                std::cout << std::endl;
                 bj.play();
                 system("pause");
                 break;
             case 2:
-                std::cout << dye::black_on_bright_white(
-                                 "Entering Cows and Bulls")
-                          << std::endl;
+                color.print_black_on_bright_white("Entering Cows and Bulls");
+                std::cout << std::endl;
                 cnb.play();
                 system("pause");
                 break;
             case 3:
-                std::cout << dye::black_on_bright_white(
-                                 "Entering Caesar Cipher")
-                          << std::endl;
+                color.print_black_on_bright_white("Entering Caesar Cipher");
+                std::cout << std::endl;
                 system("pause");
                 break;
             case 4:
-                std::cout << dye::black_on_bright_white(
-                                 "Entering Autoplay Cows and Bulls")
-                          << std::endl;
+                color.print_black_on_bright_white(
+                    "Entering Autoplay Cows and Bulls");
+                std::cout << std::endl;
                 system("pause");
                 break;
             default:

@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
 
+#include "color.h"
 #include "util.h"
 
 class BlackJack {
     Util util;
+    Color color;
     std::string types[4] = {"♠", "♥", "♦", "♣"};
 
    public:

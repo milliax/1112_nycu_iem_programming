@@ -6,10 +6,9 @@
 #include <iostream>
 #include <vector>
 
-#include "color.hpp"
-#include "util.h"
-
 #define card_num 13
+
+using namespace std;
 
 int BlackJack::mini(int a, int b) {
     if (a > b) return b;
@@ -49,14 +48,15 @@ int BlackJack::cnt_all_points(std::vector<int> cards) {
 
 void BlackJack::print_continue(int index) {
     if (index == 1)
-        std::cout << dye::aqua("continue getting new cards") << std::endl;
+        color.print_aqua("continue getting new cards");
     else
-        std::cout << "continue getting new cards" << std::endl;
-
+        cout << "continue getting new cards";
+    cout << endl;
     if (index == 2)
-        std::cout << dye::aqua("Stop and check the result") << std::endl;
+        color.print_aqua("Stop and check the result");
     else
-        std::cout << "Stop and check the result" << std::endl;
+        cout << "Stop and check the result";
+    cout << endl;
 }
 
 int BlackJack::biggest_but_less_than_21(std::vector<int> cards) {
@@ -188,34 +188,36 @@ void BlackJack::play() {
     if (cnt_all_points(user_cards) > 21) {
         // user must failed or fair
         if (cnt_all_points(computer_cards) > 21) {
-            std::cout << dye::blue("Fair") << std::endl;
-            std::cout << "Your cards both exceeded 21" << std::endl;
+            color.print_blue("Fair");
+            cout << endl << "Your cards both exceeded 21" << endl;
         } else {
-            std::cout << dye::purple("You Lost") << std::endl;
-            std::cout << "Your cards exceeded 21" << std::endl;
+            color.print_purple("You Lost");
+            std::cout << endl << "Your cards exceeded 21" << std::endl;
             std::cout << "Computer's cards: ";
             list_cards(computer_cards);
         }
     } else if (cnt_all_points(computer_cards) > 21) {
         // computer lost cards bigger than 21
-        std::cout << dye::green("You WIN !!") << std::endl;
-        std::cout << "Computer's cards exceeded 21" << std::endl;
+        color.print_green("You WIN!!");
+        std::cout << endl << "Computer's cards exceeded 21" << std::endl;
     } else if (biggest_but_less_than_21(computer_cards) ==
                biggest_but_less_than_21(user_cards)) {
         // fair
-        std::cout << dye::blue("Fair") << std::endl;
-        std::cout << "You got the same number as Computer" << std::endl;
+        color.print_blue("Fair");
+        std::cout << endl << "You got the same number as Computer" << std::endl;
     } else if (biggest_but_less_than_21(computer_cards) >
                biggest_but_less_than_21(user_cards)) {
         // computer wins
-        std::cout << dye::purple("You Lost") << std::endl;
-        std::cout << "Computer's number is bigger than yours" << std::endl;
+        color.print_purple("You Lost");
+        std::cout << endl
+                  << "Computer's number is bigger than yours" << std::endl;
         std::cout << "Computer's cards: ";
         list_cards(computer_cards);
     } else {
         // user wins
-        std::cout << dye::green("You WIN !!") << std::endl;
-        std::cout << "Your number is bigger than computer's" << std::endl;
+        color.print_green("You WIN!!");
+        std::cout << endl
+                  << "Your number is bigger than computer's" << std::endl;
     }
 
     std::cout << std::endl;

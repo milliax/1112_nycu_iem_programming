@@ -5,8 +5,10 @@
 
 #include <iostream>
 
-#include "color.hpp"
+#include "color.h"
 #include "util.h"
+
+using namespace std;
 
 int Lobby::lobby(bool first_time) {
     now_selecting = 1;
@@ -54,31 +56,32 @@ void Lobby::print_menu(int index, std::pair<int, int> coord) {
     using namespace std;
     util.set_cursor(coord.first, coord.second);
 
-    cout << dye::light_red("Press ctrl-C to exit this program") << std::endl;
+    color.print_light_red("Press ctrl-C to exit this program");
+    cout << endl;
 
     if (index == 1)
-        cout << dye::aqua("1. Black Jack") << "\t\r" << endl;
+        color.print_aqua("1. Black Jack");
     else
-        cout << "1. Black Jack"
-             << "\t\r" << endl;
+        cout << "1. Black Jack";
+    cout << "\t\r" << endl;
 
     if (index == 2)
-        cout << dye::aqua("2. Bulls and Cows") << "\t\r" << endl;
+        color.print_aqua("2. Bulls and Cows");
     else
-        cout << "2. Bulls and Cows"
-             << "\t\r" << endl;
+        cout << "2. Bulls and Cows";
+    cout << "\t\r" << endl;
 
     if (index == 3)
-        cout << dye::aqua("3. Decrypt Message") << "\t\r" << endl;
+        color.print_aqua("3. Decrypt Message");
     else
-        cout << "3. Decrypt Message"
-             << "\t\r" << endl;
+        cout << "3. Decrypt Message";
+    cout << "\t\r" << endl;
 
     if (index == 4)
-        cout << dye::aqua("4. Automated Bulls and Cows") << "\t\r" << endl;
+        color.print_aqua("4. Automated Bulls and Cows");
     else
-        cout << "4. Automated Bulls and Cows"
-             << "\t\r" << endl;
+        cout << "4. Automated Bulls and Cows";
+    cout << "\t\r" << endl;
 
     return;
 }

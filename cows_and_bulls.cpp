@@ -3,10 +3,13 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <tuple>
 
-#include "color.hpp"
+#include "color.h"
 
-int* CowsAndBulls::generate_question(){
+using namespace std;
+
+int* CowsAndBulls::generate_question() {
     static int result[4];
     int temp[10];
     for (int i = 0; i < 10; ++i) {
@@ -76,8 +79,9 @@ void CowsAndBulls::play() {
 
     int* ans = generate_question();
 
-    std::cout << dye::blue("Instruction:") << std::endl;
-    std::cout << "You have 10 chances to Guess the correct answer" << std::endl;
+    color.print_blue("Instruction:");
+    std::cout << endl
+              << "You have 10 chances to Guess the correct answer" << std::endl;
     std::cout
         << "Each time you type in the answer I will tell you how many numbers "
            "are in correct place and how many numbers are placed wrongly"
@@ -90,25 +94,24 @@ void CowsAndBulls::play() {
         std::string str = " Attempt ";
         str += (total_attempts - attempts_remain + '0');
         str += " ";
-        std::cout << dye::black_on_light_green(str) << std::endl;
-
-        std::cout << "Your answer: ";
+        color.print_black_on_light_green(str);
+        std::cout << endl << "Your answer: ";
         bool checked = false;
         do {
             if (checked) {
-                std::cout << "Please insert the correct form of your guess "
-                          << dye::red("4 digits") << std::endl;
+                std::cout << "Please insert the correct form of your guess ";
+                color.print_red("4 digits");
+                cout << endl;
             }
             checked = true;
             std::cin >> input;
         } while (!check_input(input));
 
         int a, b;
-        std::tie(a, b) = compare(parse_str2int(input), ans);
+        tie(a, b) = compare(parse_str2int(input), ans);
         if (a == 4) {
-            std::cout << dye::red_on_light_aqua(
-                             " Congratulations!! You've resolved the problem ")
-                      << std::endl;
+            color.print_red_on_light_aqua(" Congratulations!! You've resolved the problem ");
+            cout << endl;
             resolved = true;
             break;
         }
@@ -117,7 +120,7 @@ void CowsAndBulls::play() {
     }
 
     if (!resolved) {
-        std::cout << dye::black_on_grey("Correct answer: ");
+        color.print_black_on_grey("Correct Answer: ");
         for (int i = 0; i < 4; ++i) {
             std::cout << ans[i] << " ";
         }
