@@ -1,7 +1,7 @@
 #include <ctime>
 #include <iostream>
 
-// #include "lib/color.hpp"
+#include "color.hpp"
 #include "black_jack.h"
 #include "caesar_cipher.h"
 #include "cows_and_bulls.h"

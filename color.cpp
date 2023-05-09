@@ -1,6 +1,3 @@
-#ifndef COLOR_HPP
-#define COLOR_HPP
-
 #include <windows.h>
 
 #include <algorithm>
@@ -12,53 +9,99 @@
 #include <utility>
 
 namespace hue {
-extern constexpr int DEFAULT_COLOR = 7;
-extern constexpr int BAD_COLOR = -256;
+constexpr int DEFAULT_COLOR = 7;
+constexpr int BAD_COLOR = -256;
 
-extern const std::map<std::string, int> CODES;
+const std::map<std::string, int> CODES = {
+    {"black", 0},         {"k", 0},   {"blue", 1},          {"b", 1},
+    {"green", 2},         {"g", 2},   {"aqua", 3},          {"a", 3},
+    {"red", 4},           {"r", 4},   {"purple", 5},        {"p", 5},
+    {"yellow", 6},        {"y", 6},   {"white", 7},         {"w", 7},
+    {"grey", 8},          {"e", 8},   {"light blue", 9},    {"lb", 9},
+    {"light green", 10},  {"lg", 10}, {"light aqua", 11},   {"la", 11},
+    {"light red", 12},    {"lr", 12}, {"light purple", 13}, {"lp", 13},
+    {"light yellow", 14}, {"ly", 14}, {"bright white", 15}, {"bw", 15}};
 
-extern const std::map<int, std::string> NAMES;
+const std::map<int, std::string> NAMES = {
+    {0, "black"},        {1, "blue"},          {2, "green"},
+    {3, "aqua"},         {4, "red"},           {5, "purple"},
+    {6, "yellow"},       {7, "white"},         {8, "grey"},
+    {9, "light blue"},   {10, "light green"},  {11, "light aqua"},
+    {12, "light red"},   {13, "light purple"}, {14, "light yellow"},
+    {15, "bright white"}};
 
-extern inline bool is_good(int);
+inline bool is_good(int c) { return 0 <= c && c < 256; }
 
-extern inline int itoc(int);
+inline int itoc(int c) { return is_good(c) ? c : BAD_COLOR; }
 
-extern inline int itoc(int, int);
+inline int itoc(int a, int b) { return itoc(a + b * 16); }
 
 // std::string to color
-extern int stoc(std::string a);
+int stoc(std::string a) {
+    // convert s to lowercase, and format variants like  "light_blue"
+    std::transform(a.begin(), a.end(), a.begin(), [](char c) {
+        if ('A' <= c && c <= 'Z')
+            c = c - 'A' + 'a';
+        else if (c == '_' || c == '-')
+            c = ' ';
+        return c;
+    });
 
-extern int stoc(std::string a, std::string b);
+    // operator[] on std::map is non-const, use std::map::at instead
+    return (CODES.find(a) != CODES.end()) ? CODES.at(a) : BAD_COLOR;
+}
 
-extern std::string ctos(int c);
+int stoc(std::string a, std::string b) { return itoc(stoc(a), stoc(b)); }
 
-extern int get();
+std::string ctos(int c) {
+    return (0 <= c && c < 256) ? "(text) " + NAMES.at(c % 16) + " + " +
+                                     "(background) " + NAMES.at(c / 16)
+                               : "BAD COLOR";
+}
 
-extern int get_text();
+int get() {
+    CONSOLE_SCREEN_BUFFER_INFO i;
+    return GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &i)
+               ? i.wAttributes
+               : BAD_COLOR;
+}
 
-extern int get_background();
+int get_text() { return (get() != BAD_COLOR) ? get() % 16 : BAD_COLOR; }
 
-extern void set(int);
+int get_background() { return (get() != BAD_COLOR) ? get() / 16 : BAD_COLOR; }
 
-extern void set(int, int);
+void set(int c) {
+    if (is_good(c)) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
+}
 
-extern void set(std::string, std::string);
+void set(int a, int b) { set(a + b * 16); }
 
-extern void set_text(std::string);
-extern void set_background(std::string);
-extern void reset();
+void set(std::string a, std::string b) { set(stoc(a) + stoc(b) * 16); }
 
-extern int invert(int);
+void set_text(std::string a) { set(stoc(a), get_background()); }
 
-extern std::ostream &reset(std::ostream &os) {
+void set_background(std::string b) { set(get_text(), stoc(b)); }
+
+void reset() { set(DEFAULT_COLOR); }
+
+int invert(int c) {
+    if (is_good(c)) {
+        int a = c % 16;
+        int b = c / 16;
+        return b + a * 16;
+    } else
+        return BAD_COLOR;
+}
+
+std::ostream &reset(std::ostream &os) {
     reset();
     return os;
 }
-extern std::ostream &black(std::ostream &os) {
+std::ostream &black(std::ostream &os) {
     set_text("k");
     return os;
 }
-extern std::ostream &blue(std::ostream &os) {
+std::ostream &blue(std::ostream &os) {
     set_text("b");
     return os;
 }
@@ -1238,11 +1281,11 @@ class colorful : private std::list<item<T>> {
         return *this;
     }
 
-    extern void push_front(T t) {
+    void push_front(T t) {
         this->std::list<item<T>>::push_front(item<T>(std::move(t)));
     }
 
-    extern void push_back(T t) {
+    void push_back(T t) {
         this->std::list<item<T>>::push_back(item<T>(std::move(t)));
     }
 
@@ -2489,6 +2532,4 @@ template <typename T>
 R<T> bright_white_on_bright_white(T t) {
     return R<T>{S<T>(t, "bw", "bw")};
 }
-}  // namespace dye
-
-#endif
+}
