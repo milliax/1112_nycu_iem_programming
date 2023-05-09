@@ -2,10 +2,11 @@
 #include <iostream>
 
 // #include "lib/color.hpp"
-#include "lib/black_jack.h"
-#include "lib/caesar_cipher.h"
-#include "lib/cows_and_bulls.h"
-#include "lib/lobby.h"
+#include "black_jack.h"
+#include "caesar_cipher.h"
+#include "cows_and_bulls.h"
+#include "lobby.h"
+
 int main() {
     srand(time(NULL));
     bool first_time = true;

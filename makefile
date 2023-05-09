@@ -1,13 +1,13 @@
 TARGET = main
-SRCS = $(wildcard *.cpp) $(wildcard lib/*.cpp)
+SRCS = $(wildcard *.cpp) $(wildcard *.hpp)
 OBJS = $(SRCS:.cpp=.o)
 CC = g++
-CCFLAGS = -std=c++11 
+CCFLAGS = -std=c++11 -Wall
 
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
 
-%.o: %.cpp %.hpp
+%.o: %.cpp
 	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
