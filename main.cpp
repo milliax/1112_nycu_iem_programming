@@ -40,6 +40,7 @@ int main() {
             case 3:
                 color.print_black_on_bright_white("Entering Caesar Cipher");
                 std::cout << std::endl;
+                cc.play();
                 system("pause");
                 break;
             case 4:

@@ -12,7 +12,7 @@ void Color::setColor(int k) {
 }
 
 void Color::resetColor() {
-    setColor(0);
+    setColor(7);
     return;
 }
 

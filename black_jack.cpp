@@ -60,6 +60,7 @@ void BlackJack::print_continue(int index) {
 }
 
 int BlackJack::biggest_but_less_than_21(std::vector<int> cards) {
+    // TODO: broken
     int number_of_1 = 0;
     int sum = 0;
     for (auto card : cards) {
@@ -193,8 +194,6 @@ void BlackJack::play() {
         } else {
             color.print_purple("You Lost");
             std::cout << endl << "Your cards exceeded 21" << std::endl;
-            std::cout << "Computer's cards: ";
-            list_cards(computer_cards);
         }
     } else if (cnt_all_points(computer_cards) > 21) {
         // computer lost cards bigger than 21
@@ -211,17 +210,18 @@ void BlackJack::play() {
         color.print_purple("You Lost");
         std::cout << endl
                   << "Computer's number is bigger than yours" << std::endl;
-        std::cout << "Computer's cards: ";
-        list_cards(computer_cards);
     } else {
         // user wins
         color.print_green("You WIN!!");
         std::cout << endl
                   << "Your number is bigger than computer's" << std::endl;
     }
-
+    std::cout << "Computer's cards: ";
+    list_cards(computer_cards);
     std::cout << std::endl;
-
+    cout << "Your Points: " << biggest_but_less_than_21(user_cards) << endl;
+    cout << "Computer's Points: " << biggest_but_less_than_21(computer_cards)
+         << endl;
     // system("pause");
     return;
 }
