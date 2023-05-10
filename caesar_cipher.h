@@ -5,14 +5,10 @@
 
 class CaesarCipher {
     Color color;
-    std::ifstream input;
-    std::ofstream output;
-    
 
-    void init();
-    void init(std::string, std::string);
+    int init(std::fstream*, std::fstream*);
 
-    void close_stream();
+    void close_stream(std::fstream*, std::fstream*);
 
    public:
     CaesarCipher() = default;
