@@ -20,6 +20,25 @@ int BlackJack::card_point(int card) {
     return card % card_num;
 }
 
+string BlackJack::get_card_value(int value) {
+    int temp = value % card_num;
+    switch (temp) {
+        case 1:
+            return "A";
+        case 10:
+            return "10";
+        case 11:
+            return "J";
+        case 12:
+            return "Q";
+        case 0:
+            return "K";
+    }
+    string a = "0";
+    a[0] += temp;
+    return a;
+}
+
 std::string BlackJack::get_type(int card) {
     if (!(card % card_num)) {
         return types[card / card_num - 1];
@@ -27,9 +46,9 @@ std::string BlackJack::get_type(int card) {
     return types[card / card_num];
 }
 
-int BlackJack::cnt_all_points(std::vector<int>& cards) {
+int BlackJack::cnt_all_points(std::vector<int>* cards) {
     int total = 0;
-    for (std::vector<int>::iterator it = cards.begin(); it != cards.end();
+    for (std::vector<int>::iterator it = cards->begin(); it != cards->end();
          ++it) {
         total += card_point(*it);
     }
@@ -49,39 +68,42 @@ void BlackJack::print_continue(int index) {
     cout << endl;
 }
 
+void BlackJack::swap_vector(vector<int>* a, vector<int>* b) {
+    auto t = a;
+    a = b;
+    b = t;
+    return;
+}
+
 int BlackJack::biggest_but_less_than_21(std::vector<int> cards) {
-    // TODO: broken
     int number_of_1 = 0;
     int sum = 0;
 
-    for (auto card : cards) {
-        if (card == 1) {
+    for (int card : cards) {
+        if ((card % 13) == 1) {
             number_of_1++;
         } else {
             sum += card_point(card);
         }
     }
 
-    int pos = 0;
-    int k = 1;
-    std::vector<int> combinitions = {sum};
+    vector<int>* combinitions = new vector<int>;
+    vector<int>* temp = new vector<int>;
+    combinitions->push_back(sum);
 
-    while (number_of_1--) {
-        for (int i = 0; i < k; ++i) {
-            combinitions.push_back(combinitions[pos] + 1);
-            combinitions.push_back(combinitions[pos++] + 11);
+    for (int i = 0; i < number_of_1; ++i) {
+        temp->clear();
+        for (int e : *combinitions) {
+            temp->push_back(e + 1);
+            temp->push_back(e + 11);
         }
-        k *= 2;
-    }
-    cout << "Combinitions" << endl;
-    for (auto e : combinitions) {
-        cout << e << " ";
-    }
-    cout << endl;
 
-    auto it = std::upper_bound(combinitions.begin(), combinitions.end(), 21);
+        combinitions->swap(*temp);
+    }
 
-    return (it == combinitions.begin()) ? *it : *(it--);
+    auto it = std::upper_bound(combinitions->begin(), combinitions->end(), 21);
+
+    return (it == combinitions->begin()) ? *it : *(--it);
 }
 
 void BlackJack::shuffle_cards() {
@@ -93,9 +115,7 @@ void BlackJack::shuffle_cards() {
 
 void BlackJack::list_cards(std::vector<int> cards) {
     for (auto e : cards) {
-        int value = e % card_num;
-        if (!value) value = card_num;
-        std::cout << get_type(e) << " " << value << " ";
+        std::cout << get_type(e) << " " << get_card_value(e) << " ";
     }
     return;
 }
@@ -122,10 +142,10 @@ void BlackJack::play() {
     pos = 0;
     computer_cards.clear();
     user_cards.clear();
-    shuffle_cards();
     for (int i = 0; i < 52; ++i) {
         cards[i] = i + 1;
     }
+    shuffle_cards();
 
     system("cls");
     std::cout << "Black Jack start!!" << std::endl;
@@ -136,7 +156,7 @@ void BlackJack::play() {
     do {
         std::cout << "Computer got a card" << endl;
         get_card(&computer_cards);
-    } while (cnt_all_points(computer_cards) <= 18);
+    } while (cnt_all_points(&computer_cards) <= 18);
 
     std::cout << "Computer has finished choosing its/his/her cards"
               << std::endl;
@@ -144,11 +164,12 @@ void BlackJack::play() {
 
     std::pair<int, int> cursor = util.get_cursor();
 
+    // user get new cards;
+    get_card(&user_cards);
+    show_user_cards(cursor);
+
     do {
-        // user get new cards;
-        get_card(&user_cards);
         // list all cards user got
-        show_user_cards(cursor);
 
         std::cout << std::endl;
         // continue? prompt
@@ -176,21 +197,20 @@ void BlackJack::play() {
             print_continue(now_selecting);
         }
         if (selected && now_selecting == 2) break;
-        // deploy new card
-        int top = cards[pos++];
-        user_cards.push_back(top);
-        util.set_cursor(cursor.first, cursor.second);
-        // list all cards user got
-        std::cout << "These are Your cards" << std::endl;
-        list_cards(user_cards);
-    } while (cnt_all_points(user_cards) <= 21);
+        // user get new cards;
+        get_card(&user_cards);
+        show_user_cards(cursor);
+    } while (cnt_all_points(&user_cards) <= 21);
 
     // printing the result
 
     std::cout << std::endl << "\33[2K\r" << std::endl << "\33[2K\r";
 
-    int user_points = biggest_but_less_than_21(user_cards);
     int computer_points = biggest_but_less_than_21(computer_cards);
+    int user_points = biggest_but_less_than_21(user_cards);
+
+    cout << "Computer points: " << computer_points << endl;
+    cout << "User points: " << user_points << endl;
 
     if (user_points > 21 && computer_points > 21) {
         // fair
