@@ -2,3 +2,4 @@ output/
 *.o
 *.exe
 decrypt.txt
+encrypt.txt

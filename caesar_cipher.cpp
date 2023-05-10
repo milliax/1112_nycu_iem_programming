@@ -9,8 +9,8 @@ using namespace std;
 void CaesarCipher::play() {
     cout << "Caesar_cipher start!!" << endl;
 
-    fstream input;
-    fstream output;
+    ifstream input;
+    ofstream output;
 
     cout << "Opening file" << endl;
     if (init(&input, &output)) {
@@ -23,15 +23,13 @@ void CaesarCipher::play() {
     int padding;
 
     input >> str;
-    // getline(input, str);
-    // input.ignore();
     input >> padding;
 
     for (unsigned long long i = 0; i < str.size(); ++i) {
         output << (char)(str[i] + padding);
     }
 
-    output << endl;
+    // output << "Hello" << endl;
 
     color.print_black_on_bright_white(" Encrypted sucessfully ");
     cout << endl;
@@ -39,7 +37,7 @@ void CaesarCipher::play() {
     return;
 }
 
-int CaesarCipher::init(fstream* input, fstream* output) {
+int CaesarCipher::init(ifstream* input, ofstream* output) {
     // input.open("encrypt.txt");
     int attempts = 5;
     do {
@@ -52,11 +50,11 @@ int CaesarCipher::init(fstream* input, fstream* output) {
         return 1;
     }
 
-    output->open("decrypt.txt", fstream::trunc);
+    output->open("decrypt.txt");
     return 0;
 }
 
-void CaesarCipher::close_stream(fstream* input, fstream* output) {
+void CaesarCipher::close_stream(ifstream* input, ofstream* output) {
     input->close();
     output->close();
     return;

@@ -6,9 +6,9 @@
 class CaesarCipher {
     Color color;
 
-    int init(std::fstream*, std::fstream*);
+    int init(std::ifstream*, std::ofstream*);
 
-    void close_stream(std::fstream*, std::fstream*);
+    void close_stream(std::ifstream*, std::ofstream*);
 
    public:
     CaesarCipher() = default;
