@@ -7,6 +7,7 @@ class CaesarCipher {
     Color color;
     std::ifstream input;
     std::ofstream output;
+    
 
     void init();
     void init(std::string, std::string);
