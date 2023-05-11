@@ -4,24 +4,26 @@ CC = g++
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
+#LIB_DIR := lib
+INCLUDE_DIR := include
 
-EXE := $(BIN_DIR)/$(TARGET).exe
+DEPS := $(wildcard $(INCLUDE_DIR)/*.h)
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.CPP=$(OBJ_DIR)/%.o)
 
 CPPFLAGS := -Iinclude -MMD -MP
-CFLAGS := -Wall -std=c++11
+CFLAGS := -Wall -std=c++11 -Wextra -pedantic
 LDFLAGS := -Llib
 LDLIBS := -lm
 
-.PHONY: all clean
+.PHONY: all
 
-all: $(EXE)
+all: $(TARGET) $(OBJ)
 
-$(EXE): $(OBJ) | $(BIN_DIR)
+$(TARGET): $(OBJ) | $(BIN_DIR)
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | (OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 $(BIN_DIR) $(OBJ_DIR):
@@ -30,7 +32,11 @@ $(BIN_DIR) $(OBJ_DIR):
 # %.o: %.cpp
 #	$(CC) $(CCFLAGS) -c $< -o $@
 
+.PHONY: clean
 clean:
-	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
+	rm -f $(BIN_DIR)
+	rm -f $(OBJ_DIR)
+	rm $(EXE)
+#	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 
--include $(OBJ:.o=.d)
+#-include $(OBJ:.o=.d)
