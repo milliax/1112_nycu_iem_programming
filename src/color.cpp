@@ -1,5 +1,4 @@
-#include "color.h"
-
+#include <Tools/color.h>
 #include <windows.h>
 
 #include <iostream>

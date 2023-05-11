@@ -1,8 +1,7 @@
+#include <Tools/color.h>
+
 #include <fstream>
 #include <iostream>
-
-#include "color.h"
-
 class CaesarCipher {
     Color color;
 

@@ -1,10 +1,7 @@
-#include "util.h"
-
+#include <Tools/util.h>
 #include <windows.h>
 
 #include <tuple>
-
-#include "util.h"
 
 std::pair<int, int> Util::get_cursor() {
     HANDLE handle;

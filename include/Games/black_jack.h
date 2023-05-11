@@ -1,8 +1,8 @@
+#include <Tools/color.h>
+#include <Tools/util.h>
+
 #include <iostream>
 #include <vector>
-
-#include "color.h"
-#include "util.h"
 
 class BlackJack {
     Util util;

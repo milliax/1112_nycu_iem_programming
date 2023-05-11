@@ -1,11 +1,9 @@
-#include "cows_and_bulls.h"
+#include <Games/cows_and_bulls.h>
 
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
 #include <tuple>
-
-#include "color.h"
 
 using namespace std;
 
@@ -110,7 +108,8 @@ void CowsAndBulls::play() {
         int a, b;
         tie(a, b) = compare(parse_str2int(input), ans);
         if (a == 4) {
-            color.print_red_on_light_aqua(" Congratulations!! You've resolved the problem ");
+            color.print_red_on_light_aqua(
+                " Congratulations!! You've resolved the problem ");
             cout << endl;
             resolved = true;
             break;

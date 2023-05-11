@@ -1,7 +1,7 @@
-#include <iostream>
+#include <Tools/color.h>
+#include <Tools/util.h>
 
-#include "color.h"
-#include "util.h"
+#include <iostream>
 
 class Lobby {
     Util util;

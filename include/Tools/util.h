@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __UTIL_H
+#define __UTIL_H
 
 #include <windows.h>
 
@@ -12,3 +13,5 @@ class Util {
     std::pair<int, int> get_cursor();
     void set_cursor(int, int);
 };
+
+#endif

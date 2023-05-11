@@ -1,12 +1,8 @@
-#include "lobby.h"
-
+#include <Games/lobby.h>
 #include <conio.h>
 #include <windows.h>
 
 #include <iostream>
-
-#include "color.h"
-#include "util.h"
 
 using namespace std;
 

@@ -1,5 +1,4 @@
-#include "black_jack.h"
-
+#include <Games/black_jack.h>
 #include <conio.h>
 
 #include <algorithm>
@@ -209,8 +208,8 @@ void BlackJack::play() {
     int computer_points = biggest_but_less_than_21(computer_cards);
     int user_points = biggest_but_less_than_21(user_cards);
 
-    cout << "Computer points: " << computer_points << endl;
-    cout << "User points: " << user_points << endl;
+    // cout << "Computer points: " << computer_points << endl;
+    // cout << "User points: " << user_points << endl;
 
     if (user_points > 21 && computer_points > 21) {
         // fair
