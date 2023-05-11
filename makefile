@@ -1,14 +1,36 @@
 TARGET = main
-SRCS = $(wildcard *.cpp)
-OBJS = $(SRCS:.cpp=.o)
 CC = g++
-CCFLAGS = -std=c++11 -Wall
 
-$(TARGET): $(OBJS)
-	$(CC) $(OBJS) -o $(TARGET)
+SRC_DIR := src
+OBJ_DIR := obj
+BIN_DIR := bin
 
-%.o: %.cpp
-	$(CC) $(CCFLAGS) -c $< -o $@
+EXE := $(BIN_DIR)/$(TARGET).exe
+SRC := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ := $(SRC:$(SRC_DIR)/%.CPP=$(OBJ_DIR)/%.o)
+
+CPPFLAGS := -Iinclude -MMD -MP
+CFLAGS := -Wall -std=c++11
+LDFLAGS := -Llib
+LDLIBS := -lm
+
+.PHONY: all clean
+
+all: $(EXE)
+
+$(EXE): $(OBJ) | $(BIN_DIR)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | (OBJ_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(BIN_DIR) $(OBJ_DIR):
+	mkdir -p $@
+
+# %.o: %.cpp
+#	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET) *.exe
+	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
+
+-include $(OBJ:.o=.d)
