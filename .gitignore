@@ -1,4 +1,6 @@
 output/
+build/
+CMakeFiles/
 *.o
 *.exe
 decrypt.txt

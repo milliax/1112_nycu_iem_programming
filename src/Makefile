@@ -86,14 +86,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\workspace\programming_project\CMakeFiles C:\workspace\programming_project\\CMakeFiles\progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
+	cd /d C:\workspace\programming_project && $(CMAKE_COMMAND) -E cmake_progress_start C:\workspace\programming_project\CMakeFiles C:\workspace\programming_project\src\\CMakeFiles\progress.marks
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\workspace\programming_project\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 clean
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -102,81 +102,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 preinstall
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 preinstall
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\workspace\programming_project && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named project
+# Convenience name for target.
+src/CMakeFiles/target_name.dir/rule:
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/CMakeFiles/target_name.dir/rule
+.PHONY : src/CMakeFiles/target_name.dir/rule
 
-# Build rule for target.
-project: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 project
-.PHONY : project
-
-# fast build rule for target.
-project/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project.dir\build.make CMakeFiles/project.dir/build
-.PHONY : project/fast
-
-#=============================================================================
-# Target rules for targets named target_name
-
-# Build rule for target.
-target_name: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 target_name
+# Convenience name for target.
+target_name: src/CMakeFiles/target_name.dir/rule
 .PHONY : target_name
 
 # fast build rule for target.
 target_name/fast:
-	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\target_name.dir\build.make src/CMakeFiles/target_name.dir/build
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\target_name.dir\build.make src/CMakeFiles/target_name.dir/build
 .PHONY : target_name/fast
 
-#=============================================================================
-# Target rules for targets named Color
-
-# Build rule for target.
-Color: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Color
-.PHONY : Color
-
-# fast build rule for target.
-Color/fast:
-	$(MAKE) $(MAKESILENT) -f lib\CMakeFiles\Color.dir\build.make lib/CMakeFiles/Color.dir/build
-.PHONY : Color/fast
-
-main.obj: main.cpp.obj
-.PHONY : main.obj
+__/main.obj: __/main.cpp.obj
+.PHONY : __/main.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project.dir\build.make CMakeFiles/project.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+__/main.cpp.obj:
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\target_name.dir\build.make src/CMakeFiles/target_name.dir/__/main.cpp.obj
+.PHONY : __/main.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+__/main.i: __/main.cpp.i
+.PHONY : __/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project.dir\build.make CMakeFiles/project.dir/main.cpp.i
-.PHONY : main.cpp.i
+__/main.cpp.i:
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\target_name.dir\build.make src/CMakeFiles/target_name.dir/__/main.cpp.i
+.PHONY : __/main.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+__/main.s: __/main.cpp.s
+.PHONY : __/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project.dir\build.make CMakeFiles/project.dir/main.cpp.s
-.PHONY : main.cpp.s
+__/main.cpp.s:
+	cd /d C:\workspace\programming_project && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\target_name.dir\build.make src/CMakeFiles/target_name.dir/__/main.cpp.s
+.PHONY : __/main.cpp.s
 
 # Help Target
 help:
@@ -186,12 +161,10 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Color
-	@echo ... project
 	@echo ... target_name
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... __/main.obj
+	@echo ... __/main.i
+	@echo ... __/main.s
 .PHONY : help
 
 
@@ -203,6 +176,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\workspace\programming_project && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
