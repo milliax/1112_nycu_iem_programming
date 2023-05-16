@@ -5,6 +5,7 @@
 #include "caesar_cipher.h"
 #include "color.h"
 #include "cows_and_bulls.h"
+#include "auto_cow.h"
 #include "lobby.h"
 
 int main() {
@@ -13,6 +14,7 @@ int main() {
     CowsAndBulls cnb;
     BlackJack bj;
     Color color;
+    AutoCow ac;
     srand(time(NULL));
     bool first_time = true;
     while (true) {
@@ -47,6 +49,7 @@ int main() {
                 color.print_black_on_bright_white(
                     "Entering Autoplay Cows and Bulls");
                 std::cout << std::endl;
+                ac.start();
                 system("pause");
                 break;
             default:

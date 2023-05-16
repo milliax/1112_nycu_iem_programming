@@ -13,7 +13,7 @@ int* CowsAndBulls::generate_question() {
     for (int i = 0; i < 10; ++i) {
         temp[i] = i;
     }
-    std::sort(temp, temp + 10, [](int a, int b) {
+    std::sort(temp, temp + 10, [](int, int) {
         return (((double)rand() / (RAND_MAX)) > 0.5);
     });
     for (int i = 0; i < 4; ++i) {

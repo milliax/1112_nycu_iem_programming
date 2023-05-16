@@ -107,7 +107,7 @@ int BlackJack::biggest_but_less_than_21(std::vector<int> cards) {
 }
 
 void BlackJack::shuffle_cards() {
-    std::sort(cards, cards + 52, [](int a, int b) {
+    std::sort(cards, cards + 52, [](int, int) {
         return (((double)rand() / (RAND_MAX)) > 0.5);
     });
     return;
