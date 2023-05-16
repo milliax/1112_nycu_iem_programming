@@ -27,8 +27,6 @@ $(TARGET): $(OBJ) | $(BIN_DIR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-$()
-
 $(BIN_DIR) $(OBJ_DIR):
 	mkdir -p $@
 

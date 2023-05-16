@@ -8,14 +8,14 @@
 using namespace std;
 
 int* CowsAndBulls::generate_question() {
-    static int result[4];
+    // static int result[4];
+    int* result = new int[4];
     int temp[10];
     for (int i = 0; i < 10; ++i) {
         temp[i] = i;
     }
-    std::sort(temp, temp + 10, [](int, int) {
-        return (((double)rand() / (RAND_MAX)) > 0.5);
-    });
+    std::sort(temp, temp + 10,
+              [](int, int) { return (((double)rand() / (RAND_MAX)) > 0.5); });
     for (int i = 0; i < 4; ++i) {
         result[i] = temp[i];
     }
@@ -31,7 +31,8 @@ void CowsAndBulls::print_ans(int* ans) {
 }
 
 int* CowsAndBulls::parse_str2int(std::string input) {
-    static int ans[4];
+    // static int ans[4];
+    int* ans = new int[4];
     for (int i = 0; i < 4; ++i) {
         ans[i] = input[i] - '0';
     }
@@ -106,7 +107,9 @@ void CowsAndBulls::play() {
         } while (!check_input(input));
 
         int a, b;
-        tie(a, b) = compare(parse_str2int(input), ans);
+        int* tmp_int = parse_str2int(input);
+        tie(a, b) = compare(tmp_int, ans);
+        delete [] tmp_int;
         if (a == 4) {
             color.print_red_on_light_aqua(
                 " Congratulations!! You've resolved the problem ");
@@ -126,5 +129,7 @@ void CowsAndBulls::play() {
         std::cout << std::endl;
     }
 
+
+    delete [] ans;
     return;
 }
