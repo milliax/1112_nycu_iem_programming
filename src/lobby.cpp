@@ -1,4 +1,5 @@
-#include <Games/lobby.h>
+#include "lobby.h"
+
 #include <conio.h>
 #include <windows.h>
 

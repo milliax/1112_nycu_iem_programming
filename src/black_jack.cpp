@@ -1,4 +1,5 @@
-#include <Games/black_jack.h>
+#include "black_jack.h"
+
 #include <conio.h>
 
 #include <algorithm>

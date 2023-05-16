@@ -1,5 +1,6 @@
 output/
 build/
+obj/
 CMakeFiles/
 *.o
 *.exe

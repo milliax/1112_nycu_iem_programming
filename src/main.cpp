@@ -1,11 +1,11 @@
-#include <Games/black_jack.h>
-#include <Games/caesar_cipher.h>
-#include <Games/cows_and_bulls.h>
-#include <Games/lobby.h>
-#include <Tools/color.h>
-
 #include <ctime>
 #include <iostream>
+
+#include "black_jack.h"
+#include "caesar_cipher.h"
+#include "color.h"
+#include "cows_and_bulls.h"
+#include "lobby.h"
 
 int main() {
     Lobby lb;

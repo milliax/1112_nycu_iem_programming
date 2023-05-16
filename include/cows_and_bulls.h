@@ -1,8 +1,8 @@
-#include <Tools/color.h>
-
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+
+#include "color.h"
 
 class CowsAndBulls {
     Color color;

@@ -1,4 +1,4 @@
-#include <Games/cows_and_bulls.h>
+#include "cows_and_bulls.h"
 
 #include <algorithm>
 #include <cstdlib>
