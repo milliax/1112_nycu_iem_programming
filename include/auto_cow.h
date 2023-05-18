@@ -13,6 +13,7 @@ class AutoCow {
     short ans_appeared;
     bool possibility_map[4][10];
 
+    int* user_input_numbers();
     int* determine();
     void init();
     void save_guess(int*, std::pair<int, int>*);

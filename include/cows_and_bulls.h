@@ -1,3 +1,6 @@
+#ifndef __COWS_AND_BULLS_H
+#define __COWS_AND_BULLS_H
+
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
@@ -19,3 +22,5 @@ class CowsAndBulls {
     bool check_input(std::string);
     void play();
 };
+
+#endif
