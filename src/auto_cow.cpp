@@ -9,6 +9,7 @@ void AutoCow::start() {
     system("cls");
     init();
     bool is_passed = false;
+    int attempt_times = 0;
 
     // generate the question
     // int* ans = cb.generate_question();
@@ -17,6 +18,9 @@ void AutoCow::start() {
     // cout << "This"
 
     while (!is_passed) {
+        string str = " Attempt " + to_string(++attempt_times) + " ";
+        cout << dye::blue_on_grey(str) << endl;
+
         // determine what number to guess
         int* possible_guess = nullptr;
         possible_guess = determine();
@@ -24,10 +28,12 @@ void AutoCow::start() {
         for (int i = 0; i < 4; ++i) {
             cout << possible_guess[i] << " ";
         }
+        cout << endl;
 
         // guess the number
         pair<int, int> result = cb.compare(possible_guess, ans);
 
+        cout << result.first << "A" << result.second << "B" << endl;
         // if passed the break;
 
         if (result.first == 4) {
@@ -39,6 +45,7 @@ void AutoCow::start() {
         save_guess(possible_guess, &result);
         save_status();
         delete[] possible_guess;
+        cout << endl;
     }
 
     // end of program
@@ -100,10 +107,22 @@ void AutoCow::save_status() {
                 }
             }
             break;
+        case 1:
+        case 2:
+        case 3:
+            // all of these could be answer;
+            for (int i = 0; i < 4; ++i) {
+                if (ans_appeared_numbers.find(last_guess.guess[i]) !=
+                    ans_appeared_numbers.end())
+                    ans_appeared++;
+                ans_appeared_numbers.insert(last_guess.guess[i]);
+            }
+            break;
         case 4:
             // 4 digits in history.guess are answers but permutation is
             // incorrect
             ans_appeared = 4;
+            // ans_appeared = make_pair(4,);
 
             for (int i = 0; i < 4; ++i) {
                 numbers[last_guess.guess[i]] = true;
@@ -118,12 +137,23 @@ void AutoCow::save_status() {
             break;
         default:
             // 1,2,3 if no unexpected error
-            ans_appeared += sum_of_AB;
             // TODO: we need to do something but i dont know
     }
 
     if (ans_appeared == 4) {
         // can narrow down the possibility_map;
+        bool number_table[10] = {false};
+        for (int e : ans_appeared_numbers) {
+            number_table[e] = true;
+        }
+
+        for (int i = 0; i < 10; ++i) {
+            if (!number_table[i]) {
+                for (int j = 0; j < 4; ++j) {
+                    possibility_map[j][i] = false;
+                }
+            }
+        }
     }
 
     return;
@@ -149,6 +179,19 @@ int* AutoCow::determine() {
     }
 
     // Guess last_guess = guess_history.back();
+    if (ans_appeared == 4) {
+        // all numbers appeared before
+        if (ans_appeared_numbers.size() == 4) {
+            // 4 numbers got, permutation left
+            // TODO: work!! priority 2
+        } else {
+            // narrow down the number
+            // TODO: work!! priority 3
+        }
+    } else {
+        // keep finding new numbers
+        // TODO: work!! priority 1
+    }
 
     return possible_ans;
 }
@@ -156,6 +199,7 @@ int* AutoCow::determine() {
 void AutoCow::init() {
     // clear vector
     guess_history.clear();
+    ans_appeared_numbers.clear();
     ans_appeared = 0;
     // clear possibility map
     for (int i = 0; i < 4; ++i) {

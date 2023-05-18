@@ -1,5 +1,6 @@
 #include <utility>
 #include <vector>
+#include <set>
 
 #include "cows_and_bulls.h"
 
@@ -10,6 +11,8 @@ struct Guess {
 
 class AutoCow {
     CowsAndBulls cb;
+    // std::pair<int,std::vector<int>> ans_appeared;
+    set<int> ans_appeared_numbers;
     short ans_appeared;
     bool possibility_map[4][10];
 
