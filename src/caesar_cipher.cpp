@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+#include <color.hpp>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -14,8 +15,8 @@ void CaesarCipher::play() {
 
     cout << "Opening file" << endl;
     if (init(&input, &output)) {
-        color.print_black_on_light_green(" Failed Openning files \n");
-        color.print_black_on_bright_white(" Returnning to Lobby \n");
+        cout << dye::black_on_light_green(" Failed Opening Files ") << endl;
+        cout << dye::black_on_bright_white(" Returnning to Lobby ") << endl;
         return;
     }
 
@@ -31,8 +32,7 @@ void CaesarCipher::play() {
 
     // output << "Hello" << endl;
 
-    color.print_black_on_bright_white(" Encrypted sucessfully ");
-    cout << endl;
+    cout << dye::black_on_bright_white(" Encrypted successfully ") <<endl;
 
     return;
 }

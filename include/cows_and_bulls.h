@@ -5,10 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "color.h"
-
 class CowsAndBulls {
-    Color color;
     const int total_attempts = 10;
 
    public:

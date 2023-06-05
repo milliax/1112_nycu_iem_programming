@@ -1,5 +1,5 @@
-#ifndef COLOR_HPP
-#define COLOR_HPP
+#ifndef __COLOR_HPP__
+#define __COLOR_HPP__
 
 #include <algorithm>
 #include <iostream>
@@ -447,7 +447,6 @@ namespace hue
     std::ostream & bright_white_on_light_yellow(std::ostream & os) { set("bw", "ly"); return os; }
     std::ostream & bright_white_on_bright_white(std::ostream & os) { set("bw", "bw"); return os; }
 }
-
 
 namespace dye
 {

@@ -12,7 +12,7 @@ OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 LIB := $(wildcard $(LIB_DIR)/*.hpp)
 
 LDFLAGS := -Llib
-CFLAGS := -Wall -Wextra -std=c++11
+CFLAGS := -Wall -Wextra -std=c++20
 CPPFLAGS := -Iinclude -MMD -MP
 LDLIBS   := -lm
 LIB_FLAGS := -shared -fpic
@@ -22,16 +22,16 @@ LIB_FLAGS := -shared -fpic
 all: $(TARGET)
 
 # $(TARGET): $(OBJ) $(LIB_OBJ) | $(BIN_DIR)
-$(TARGET): $(OBJ) | $(BIN_DIR)
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -Ilib -o $@
+$(TARGET): $(OBJ)
+	$(CC) $(LDFLAGS) $(CFLAGS) $^ $(LDLIBS) -I lib -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -Ilib -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -I lib -c $< -o $@
 
 # $(OBJ_DIR)/%.so: $(LIB_DIR)/%.hpp | $(OBJ_DIR)
 # 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
 
-$(BIN_DIR) $(OBJ_DIR):
+$(OBJ_DIR):
 	mkdir -p $@
 
 clean:

@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 
+#include <color.hpp>
 #include <iostream>
 
 using namespace std;
@@ -12,13 +13,12 @@ int Lobby::lobby(bool first_time) {
     system("cls");
     // bool prefix = false;
     if (first_time) {
-        std::cout << "Welcome to This program" << std::endl;
-        std::cout << "Using the cursor to select gamemode you want."
-                  << std::endl;
-        std::cout << "There are Four different games you can try." << std::endl;
+        cout << "Welcome to This program" << endl;
+        cout << "Using the cursor to select gamemode you want." << endl;
+        cout << "There are Four different games you can try." << endl;
     }
 
-    std::pair<int, int> coord = util.get_cursor();
+    pair<int, int> coord = util.get_cursor();
 
     print_menu(now_selecting, coord);
 
@@ -38,7 +38,7 @@ int Lobby::lobby(bool first_time) {
             case 13:
                 return now_selecting;
             case 3:
-                std::cout << "Terminate Key detected" << std::endl;
+                cout << "Terminate Key detected" << endl;
                 return 0;
             default:
                 break;
@@ -49,36 +49,35 @@ int Lobby::lobby(bool first_time) {
     return 0;
 }
 
-void Lobby::print_menu(int index, std::pair<int, int> coord) {
+void Lobby::print_menu(int index, pair<int, int> coord) {
     using namespace std;
     util.set_cursor(coord.first, coord.second);
 
-    color.print_light_red("Press ctrl-C to exit this program");
-    cout << endl;
+    cout << dye::light_red("Press Ctrl-C to exit this program") << endl;
 
+    util.clear_line();
     if (index == 1)
-        color.print_aqua("1. Black Jack");
+        cout << dye::aqua("1. Black Jack") << endl;
     else
-        cout << "1. Black Jack";
-    cout << "\t\r" << endl;
+        cout << "1. Black Jack" << endl;
 
+    util.clear_line();
     if (index == 2)
-        color.print_aqua("2. Bulls and Cows");
+        cout << dye::aqua("2. Bulls and Cows") << endl;
     else
-        cout << "2. Bulls and Cows";
-    cout << "\t\r" << endl;
+        cout << "2. Bulls and Cows" << endl;
 
+    util.clear_line();
     if (index == 3)
-        color.print_aqua("3. Decrypt Message");
+        cout << dye::aqua("3. Decrypt Message") << endl;
     else
-        cout << "3. Decrypt Message";
-    cout << "\t\r" << endl;
+        cout << "3. Decrypt Message" << endl;
 
+    util.clear_line();
     if (index == 4)
-        color.print_aqua("4. Automated Bulls and Cows");
+        cout << dye::aqua("4. Automated Bulls and Cows") << endl;
     else
-        cout << "4. Automated Bulls and Cows";
-    cout << "\t\r" << endl;
+        cout << "4. Automated Bulls and Cows" << endl;
 
     return;
 }

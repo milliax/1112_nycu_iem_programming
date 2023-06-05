@@ -2,14 +2,17 @@
 
 #include <windows.h>
 
+#include <iostream>
 #include <tuple>
 
-std::pair<int, int> Util::get_cursor() {
+using namespace std;
+
+pair<int, int> Util::get_cursor() {
     HANDLE handle;
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
     handle = GetStdHandle(STD_OUTPUT_HANDLE);
     GetConsoleScreenBufferInfo(handle, &cbsi);
-    return std::make_pair(cbsi.dwCursorPosition.X, cbsi.dwCursorPosition.Y);
+    return make_pair(cbsi.dwCursorPosition.X, cbsi.dwCursorPosition.Y);
 }
 
 void Util::set_cursor(int x = 0, int y = 0) {
@@ -31,3 +34,5 @@ int Util::min(int a, int b) {
     if (a > b) return b;
     return a;
 }
+
+void Util::clear_line() { cout << "\33[2K\r"; }

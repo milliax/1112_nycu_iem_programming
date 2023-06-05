@@ -1,11 +1,9 @@
 #include <iostream>
 
-#include "color.h"
 #include "util.h"
 
 class Lobby {
     Util util;
-    Color color;
     int keys;
     int now_selecting;
     const int max = 4;

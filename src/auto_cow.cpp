@@ -133,14 +133,10 @@ void AutoCow::save_status() {
                     possibility_map[j][i] = false;
                 }
             }
-
             break;
-        default:
-            // 1,2,3 if no unexpected error
-            // TODO: we need to do something but i dont know
     }
 
-    if (ans_appeared == 4) {
+    if (ans_appeared == 4 && ans_appeared_numbers.size() > 4) {
         // can narrow down the possibility_map;
         bool number_table[10] = {false};
         for (int e : ans_appeared_numbers) {
@@ -179,6 +175,7 @@ int* AutoCow::determine() {
     }
 
     // Guess last_guess = guess_history.back();
+
     if (ans_appeared == 4) {
         // all numbers appeared before
         if (ans_appeared_numbers.size() == 4) {

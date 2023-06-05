@@ -12,6 +12,7 @@ class Util {
     int min(int, int);
     std::pair<int, int> get_cursor();
     void set_cursor(int, int);
+    void clear_line();
 };
 
 #endif
