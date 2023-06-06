@@ -19,20 +19,39 @@ void CaesarCipher::play() {
         // cout << dye::black_on_bright_white(" Returnning to Lobby ") << endl;
         return;
     }
-
+    system("cls");
+    system("start encrypt.txt");
     string str;
     int padding;
 
-    input >> str;
+    getline(input, str);
     input >> padding;
 
     for (unsigned long long i = 0; i < str.size(); ++i) {
-        output << (char)(str[i] + padding);
+        char temp;
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            // 小寫
+            temp = str[i] - padding;
+            if (temp < 'a') {
+                temp += 26;
+            }
+        } else if (str[i] >= 'A' && str[i] <= 'Z') {
+            // 大寫
+            temp = str[i] - padding;
+            if(temp < 'A'){
+                temp += 26;
+            }
+        } else {
+            temp = str[i];
+        }
+        output << temp;
     }
 
     // output << "Hello" << endl;
 
     // cout << dye::black_on_bright_white(" Encrypted successfully ") <<endl;
+    input.close();
+    output.close();
 
     return;
 }
