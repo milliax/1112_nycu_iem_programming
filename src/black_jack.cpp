@@ -39,11 +39,18 @@ string BlackJack::get_card_value(int value) {
     return a;
 }
 
-string BlackJack::get_type(int card) {
+void BlackJack::get_type(int card) {
+    int pos;
     if (!(card % card_num)) {
-        return types[card / card_num - 1];
+        pos = card / card_num - 1;
+    } else {
+        pos = card / card_num;
     }
-    return types[card / card_num];
+    if (pos == 1 || pos == 2) {
+        color.red(types[pos]);
+    } else {
+        cout << types[pos];
+    }
 }
 
 int BlackJack::cnt_all_points(vector<int>* cards) {
@@ -113,7 +120,8 @@ void BlackJack::shuffle_cards() {
 
 void BlackJack::list_cards(vector<int> cards) {
     for (auto e : cards) {
-        cout << get_type(e) << " " << get_card_value(e) << " ";
+        get_type(e);
+        cout << " " << get_card_value(e) << " ";
     }
     return;
 }

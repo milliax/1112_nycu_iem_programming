@@ -26,7 +26,7 @@ class BlackJack {
    public:
     BlackJack() = default;
 
-    std::string get_type(int);
+    void get_type(int);
 
     int card_point(int);
     int cnt_all_points(std::vector<int>*);
