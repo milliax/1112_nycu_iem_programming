@@ -1,8 +1,9 @@
 #include "auto_cow.h"
 
-#include <color.hpp>
-#include <iostream>
+// #include <color.hpp>
+#include <string.h>
 
+#include <iostream>
 using namespace std;
 
 void AutoCow::start() {
@@ -19,7 +20,7 @@ void AutoCow::start() {
 
     while (!is_passed) {
         string str = " Attempt " + to_string(++attempt_times) + " ";
-        cout << dye::blue_on_grey(str) << endl;
+        // cout << dye::blue_on_grey(str) << endl;
 
         // determine what number to guess
         int* possible_guess = nullptr;
@@ -69,9 +70,9 @@ int* AutoCow::user_input_numbers() {
 
         // print dialog to user
         if (!first_time) {
-            cout << "Please Input " << dye::red_on_black("Four digits")
-                 << " of numbers that " << dye::red_on_black("does not repeat.")
-                 << endl;
+            // cout << "Please Input " << dye::red_on_black("Four digits")
+            //      << " of numbers that " << dye::red_on_black("does not repeat.")
+            //      << endl;
         }
         first_time = false;
         cin >> input;

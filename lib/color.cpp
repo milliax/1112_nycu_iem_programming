@@ -53,7 +53,7 @@ int Colorize::stoc(string a, string b) { return itoc(stoc(a), stoc(b)); }
 //                                : "BAD COLOR";
 // }
 
-int Colorize::get() {
+int Colorize::color_get() {
     CONSOLE_SCREEN_BUFFER_INFO i;
     return GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &i)
                ? i.wAttributes
@@ -61,11 +61,11 @@ int Colorize::get() {
 }
 
 int Colorize::get_text() {
-    return (get() != BAD_COLOR) ? get() % 16 : BAD_COLOR;
+    return (color_get() != BAD_COLOR) ? color_get() % 16 : BAD_COLOR;
 }
 
 int Colorize::get_background() {
-    return (get() != BAD_COLOR) ? get() / 16 : BAD_COLOR;
+    return (color_get() != BAD_COLOR) ? color_get() / 16 : BAD_COLOR;
 }
 
 int Colorize::invert(int c) {
@@ -75,4 +75,65 @@ int Colorize::invert(int c) {
         return b + a * 16;
     }
     return BAD_COLOR;
+}
+
+// template<typename T> Colorize::colorful<T> operator+(colorful<T>
+// lhs,colorful<T> rhs){
+
+// }
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const colorful<T>& colorful) {
+    for (const auto& elem : colorful) os << elem;
+    return os;
+}
+
+template <typename T>
+Colorize::colorful<T> invert(colorful<T> col) {
+    colorful<T> res(std::move(col));
+    for (auto& elem : res) elem.invert();
+    return res;
+}
+
+template <typename T>
+class Colorize::item {
+    T thing;
+    int color;
+
+   public:
+    item(T t) : thing(std::move(t)), color(color_get()) {}
+    item(T t, int a) : thing(std::move(t)), color(itoc(a)) {}
+    item(T t, int a, int b) : thing(std::move(t)), color(itoc(a, b)) {}
+    item(T t, std::string a) : thing(std::move(t)), color(stoc(a)) {}
+    item(T t, std::string a, std::string b)
+        : thing(std::move(t)), color(stoc(a, b)) {}
+
+    item<T>& invert() {
+        color = invert(color);
+        return *this;
+    }
+
+    template <typename U>
+    friend class colorful;
+
+    template <typename U>
+    friend std::ostream& operator<<(std::ostream&, const item<U>&);
+};
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const item<T>& it) {
+    hue::set(it.color);
+    os << it.thing;
+    hue::reset();
+    return os;
+}
+
+template <typename T>
+Colorize::R<T> Colorize::colorize(T, std::string str) {
+    return R<T>{S<T>(t, str)};
+}
+
+std::ostream& Colorize::color_red(std::ostream& os) {
+    set_text("r");
+    return os;
 }

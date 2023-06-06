@@ -1,8 +1,10 @@
+#include <color.h>
+
 #include <iostream>
 
 #include "util.h"
-
 class Lobby {
+    Colorize color;
     Util util;
     int keys;
     int now_selecting;

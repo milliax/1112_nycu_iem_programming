@@ -3,7 +3,7 @@
 #include <conio.h>
 
 #include <algorithm>
-#include <color.hpp>
+// #include <color.hpp>
 #include <iostream>
 #include <vector>
 
@@ -57,15 +57,15 @@ int BlackJack::cnt_all_points(vector<int>* cards) {
 }
 
 void BlackJack::print_continue(int index) {
-    if (index == 1)
-        cout << dye::aqua("Continue Getting New Card") << endl;
-    else
-        cout << "continue getting new cards" << endl;
-    cout << endl;
-    if (index == 2)
-        cout << dye::aqua("Stop and Check The Result") << endl;
-    else
-        cout << "Stop and Check the Result" << endl;
+    // if (index == 1)
+    //     cout << dye::aqua("Continue Getting New Card") << endl;
+    // else
+    //     cout << "continue getting new cards" << endl;
+    // cout << endl;
+    // if (index == 2)
+    //     cout << dye::aqua("Stop and Check The Result") << endl;
+    // else
+    //     cout << "Stop and Check the Result" << endl;
 }
 
 void BlackJack::swap_vector(vector<int>* a, vector<int>* b) {
@@ -237,7 +237,7 @@ void BlackJack::play() {
 // };
 
 void BlackJack::print_fair(string reason) {
-    cout << dye::blue("Tie") << endl;
+    // cout << dye::blue("Tie") << endl;
 
     cout << reason << endl;
     print_points();
@@ -245,14 +245,14 @@ void BlackJack::print_fair(string reason) {
 }
 
 void BlackJack::print_user_wins(string reason) {
-    cout << dye::green("You WIN!!") << endl;
+    // cout << dye::green("You WIN!!") << endl;
     cout << reason << endl;
     print_points();
     return;
 }
 
 void BlackJack::print_computer_wins(string reason) {
-    cout << dye::purple("You Lost") << endl;
+    // cout << dye::purple("You Lost") << endl;
     cout << reason << endl;
     print_points();
     return;

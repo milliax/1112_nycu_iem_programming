@@ -1,4 +1,4 @@
-#include <color.hpp>
+// #include <color.hpp>
 #include <ctime>
 #include <iostream>
 
@@ -28,27 +28,27 @@ int main() {
                 cout << "Powered By Milliax" << endl;
                 return 0;
             case 1:
-                cout << dye::black_on_bright_white("Entering Black Jack")
-                     << endl;
+                // cout << dye::black_on_bright_white("Entering Black Jack")
+                //      << endl;
                 bj.play();
                 system("pause");
                 break;
             case 2:
-                cout << dye::black_on_bright_white("Entering Cows and Bulls")
-                     << endl;
+                // cout << dye::black_on_bright_white("Entering Cows and Bulls")
+                //      << endl;
                 cnb.play();
                 system("pause");
                 break;
             case 3:
-                cout << dye::black_on_bright_white("Entering Caesar Cipher")
-                     << endl;
+                // cout << dye::black_on_bright_white("Entering Caesar Cipher")
+                //      << endl;
                 cc.play();
                 system("pause");
                 break;
             case 4:
-                cout << dye::black_on_bright_white(
-                            "Entering Autoplay Cows and Bulls")
-                     << endl;
+                // cout << dye::black_on_bright_white(
+                //             "Entering Autoplay Cows and Bulls")
+                //      << endl;
                 ac.start();
                 system("pause");
                 break;
