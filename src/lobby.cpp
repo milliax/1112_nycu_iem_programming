@@ -3,7 +3,6 @@
 #include <conio.h>
 #include <windows.h>
 
-// #include <color.hpp>
 #include <iostream>
 
 using namespace std;
@@ -53,29 +52,29 @@ void Lobby::print_menu(int index, pair<int, int> coord) {
     using namespace std;
     util.set_cursor(coord.first, coord.second);
 
-    // cout << dye::light_red("Press Ctrl-C to exit this program") << endl;
+    color.light_red("Press Ctrl-C to exit this program\n");
 
     util.clear_line();
-    // if (index == 1)
-    //     cout << dye::aqua("1. Black Jack") << endl;
-    // else
-    //     cout << "1. Black Jack" << endl;
+    if (index == 1)
+        color.aqua("1. Black Jack\n");
+    else
+        cout << "1. Black Jack" << endl;
 
     util.clear_line();
-    // if (index == 2)
-    //     cout << dye::aqua("2. Bulls and Cows") << endl;
-    // else
-    //     cout << "2. Bulls and Cows" << endl;
+    if (index == 2)
+        color.aqua("2. Bulls and Cows\n");
+    else
+        cout << "2. Bulls and Cows" << endl;
 
     util.clear_line();
-    // if (index == 3)
-    //     cout << dye::aqua("3. Decrypt Message") << endl;
-    // else
-    //     cout << "3. Decrypt Message" << endl;
+    if (index == 3)
+        color.aqua("3. Decrypt Message\n");
+    else
+        cout << "3. Decrypt Message" << endl;
 
-    util.clear_line();
+    // util.clear_line();
     // if (index == 4)
-    //     cout << dye::aqua("4. Automated Bulls and Cows") << endl;
+    //     color.aqua("4. Automated Bulls and Cows\n");
     // else
     //     cout << "4. Automated Bulls and Cows" << endl;
 

@@ -19,8 +19,8 @@ void AutoCow::start() {
     // cout << "This"
 
     while (!is_passed) {
-        string str = " Attempt " + to_string(++attempt_times) + " ";
-        // cout << dye::blue_on_grey(str) << endl;
+        string str = " Attempt " + to_string(++attempt_times) + " \n";
+        color.blue_on_grey(str);
 
         // determine what number to guess
         int* possible_guess = nullptr;
@@ -70,9 +70,10 @@ int* AutoCow::user_input_numbers() {
 
         // print dialog to user
         if (!first_time) {
-            // cout << "Please Input " << dye::red_on_black("Four digits")
-            //      << " of numbers that " << dye::red_on_black("does not repeat.")
-            //      << endl;
+            cout << "Please Input ";
+            color.red_on_black("Four digits");
+            cout << " of numbers that ";
+            color.red_on_black("does not repeat.\n");
         }
         first_time = false;
         cin >> input;

@@ -15,8 +15,8 @@ void CaesarCipher::play() {
 
     cout << "Opening file" << endl;
     if (init(&input, &output)) {
-        // cout << dye::black_on_light_green(" Failed Opening Files ") << endl;
-        // cout << dye::black_on_bright_white(" Returnning to Lobby ") << endl;
+        color.black_on_light_green(" Failed Opening Files \n");
+        color.black_on_bright_white(" Returnning to Lobby \n");
         return;
     }
     system("cls");
@@ -38,7 +38,7 @@ void CaesarCipher::play() {
         } else if (str[i] >= 'A' && str[i] <= 'Z') {
             // 大寫
             temp = str[i] - padding;
-            if(temp < 'A'){
+            if (temp < 'A') {
                 temp += 26;
             }
         } else {
@@ -49,9 +49,11 @@ void CaesarCipher::play() {
 
     // output << "Hello" << endl;
 
-    // cout << dye::black_on_bright_white(" Encrypted successfully ") <<endl;
+    color.black_on_bright_white(" Encrypted successfully \n");
     input.close();
     output.close();
+
+    system("start decrypt.txt");
 
     return;
 }

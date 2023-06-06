@@ -1,10 +1,13 @@
-#include "util.h"
+#include <color.h>
 
 #include <iostream>
 #include <vector>
 
+#include "util.h"
+
 class BlackJack {
     Util util;
+    Colorize color;
     std::string types[4] = {"♠", "♥", "♦", "♣"};
     std::vector<int> computer_cards;
     std::vector<int> user_cards;

@@ -1,15 +1,17 @@
+#include <color.h>
+
+#include <set>
 #include <utility>
 #include <vector>
-#include <set>
 
 #include "cows_and_bulls.h"
-
 struct Guess {
     int guess[4];
     std::pair<int, int> result;
 };
 
 class AutoCow {
+    Colorize color;
     CowsAndBulls cb;
     // std::pair<int,std::vector<int>> ans_appeared;
     std::set<int> ans_appeared_numbers;

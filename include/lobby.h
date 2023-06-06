@@ -8,7 +8,7 @@ class Lobby {
     Util util;
     int keys;
     int now_selecting;
-    const int max = 4;
+    const int max = 3;
     const int min = 1;
 
    public:

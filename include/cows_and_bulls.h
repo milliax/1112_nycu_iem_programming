@@ -1,11 +1,14 @@
 #ifndef __COWS_AND_BULLS_H
 #define __COWS_AND_BULLS_H
 
+#include <color.h>
+
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
 
 class CowsAndBulls {
+    Colorize color;
     const int total_attempts = 10;
 
    public:

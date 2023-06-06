@@ -1,7 +1,12 @@
+#ifndef __COLOR_H
+#define __COLOR_H
+
 #include <iostream>
 #include <map>
 
 class Colorize {
+    int DEFAULT_COLOR = 7;
+    int BAD_COLOR = -256;
     const std::map<std::string, int> CODES = {
         {"black", 0},         {"k", 0},   {"blue", 1},          {"b", 1},
         {"green", 2},         {"g", 2},   {"aqua", 3},          {"a", 3},
@@ -21,9 +26,23 @@ class Colorize {
         {15, "bright white"}};
     bool is_good(int);
     void set_color(int);
+    void set_color(int, int);
     void reset();
 
    public:
     Colorize() = default;
     void red(std::string);
+    void aqua(std::string);
+    void blue(std::string);
+    void green(std::string);
+    void purple(std::string);
+    void black_on_light_green(std::string);
+    void red_on_light_green(std::string);
+    void black_on_grey(std::string);
+    void light_red(std::string);
+    void black_on_bright_white(std::string);
+    void blue_on_grey(std::string);
+    void red_on_black(std::string);
 };
+
+#endif

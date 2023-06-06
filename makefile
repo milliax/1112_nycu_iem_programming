@@ -9,7 +9,7 @@ LIB_DIR := lib
 
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-LIB := $(wildcard $(LIB_DIR)/*.hpp)
+LIB := $(wildcard $(LIB_DIR)/*.h)
 
 LDFLAGS := -Llib
 CFLAGS := -Wall -Wextra -std=c++20
